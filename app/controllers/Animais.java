@@ -50,6 +50,10 @@ public class Animais extends Controller {
 	}
 	
 	public static void deletar(Long id) {
+		if ("false".equals(session.get("veterinario"))) {
+			String mensagem = "Apenas veterinários podem excluir!";
+			listar(null, mensagem);
+		}
 		Animal animal = Animal.findById(id);
 		
 		String mensagem = "";

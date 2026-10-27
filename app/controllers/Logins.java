@@ -10,13 +10,14 @@ public class Logins extends Controller{
 	}
 	
 	public static void logar(String username, String senha) {
-		if (!Operador.operadorExiste(username, senha)) {
-			System.out.println("pq diabos cai aq");
+		Operador operadorLogado = Operador.obterUsuario(username, senha);
+		if (operadorLogado == null) {
 			flash.error("Usuário ou senha inválidos, tente novamente!");
 			form();
 		}
 		
 		session.put("logado", username);
+		session.put("veterinario", operadorLogado.veterinario);
 		flash.success("Usuário logado com sucesso!");
 		Animais.listar(null, null);
 	}

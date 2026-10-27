@@ -11,13 +11,9 @@ public class Operador extends Model {
 	public String senha;
 	public boolean veterinario;
 	
-	public static boolean operadorExiste(String username, String senha) {
+	public static Operador obterUsuario(String username, String senha) {
 		Operador operador = Operador.find("username = ?1 and senha = ?2", username, senha).first();
-		
-		if (operador == null) {
-			return false;
-		}
-			return true;
+		return operador;
 	}
 	
 }
