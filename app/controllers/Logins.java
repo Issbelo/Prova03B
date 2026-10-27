@@ -1,6 +1,8 @@
 package controllers;
 
+import models.Dados;
 import models.Operador;
+import play.cache.Cache;
 import play.mvc.Controller;
 
 public class Logins extends Controller{
@@ -16,6 +18,8 @@ public class Logins extends Controller{
 			form();
 		}
 		
+		Dados d = new Dados();
+		Cache.set(session.getId(), d);
 		session.put("logado", username);
 		session.put("veterinario", operadorLogado.veterinario);
 		flash.success("Usuário logado com sucesso!");

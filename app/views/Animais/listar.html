@@ -23,4 +23,11 @@ ${mensagem}
 	#{/else}
 </ul>
 
+<h5>Animais recém-cadastrados:</h5>
+<ul>
+#{list items:animaisCadastrados, as:'a'}
+<li>${a}</li>
+#{/list}
+</ul>
+
 <a href="@{Animais.form}">Cadastrar Novo Animal</a>

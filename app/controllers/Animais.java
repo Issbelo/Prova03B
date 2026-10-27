@@ -3,7 +3,9 @@ package controllers;
 import java.util.List;
 
 import models.Animal;
+import models.Dados;
 import models.TipoAnimal;
+import play.cache.Cache;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -29,7 +31,9 @@ public class Animais extends Controller {
 			animais = Animal.find("lower(nome) = ?1", 
 					nomeBusca.toLowerCase()).fetch();
 		}
-		render(animais, nomeBusca, mensagem);
+		Dados d = Cache.get(session.getId(), Dados.class);
+		List<String> animaisCadastrados =d.animaisCadastrados;
+		render(animais, nomeBusca, mensagem, animaisCadastrados);
 	}
 
 	public static void salvar(Animal animal) {
@@ -46,6 +50,8 @@ public class Animais extends Controller {
 		}
 
 		animal.save();
+		Dados d = Cache.get(session.getId(), Dados.class);
+		d.animaisCadastrados.add(animal.nome);
 		listar(null, "");
 	}
 	
