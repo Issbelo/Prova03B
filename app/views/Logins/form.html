@@ -1,0 +1,15 @@
+#{extends 'main.html' /}
+#{set title:'Login de operador' /}
+
+<h1>Login de operador</h1>
+
+<form action="@{Logins.logar}" method="POST">
+
+	<label>Username:</label><br />
+	<input type="text" name="username" /><br />
+
+	<label>Senha:</label><br />
+	<input type="password" name="senha"/><br />
+
+	<input type="submit" value="Logar"/>
+</form>
